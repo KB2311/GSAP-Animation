@@ -1,11 +1,19 @@
 "use client";
-import React, { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import React, { useRef } from "react";
+import { gsap } from "gsap/dist/gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+import Flip from "gsap/dist/Flip";
 
-gsap.registerPlugin(ScrollTrigger);
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.registerPlugin(useGSAP);
+  gsap.registerPlugin(Flip);
+}
 
 const Animation1 = () => {
+  const box1 = useRef(null);
+  const box2 = useRef(null);
   const boxRef1 = useRef(null);
   const boxRef2 = useRef(null);
   const boxRef3 = useRef(null);
@@ -13,10 +21,9 @@ const Animation1 = () => {
   const TextRef1 = useRef(null);
   const TextRef2 = useRef(null);
 
-  useEffect(() => {
+  useGSAP(() => {
     if (boxRef3.current) {
       const h1Elements = boxRef3.current.querySelectorAll("h1");
-
       gsap.to(h1Elements, {
         opacity: 1,
         y: 0,
@@ -28,7 +35,7 @@ const Animation1 = () => {
           trigger: h1Elements,
           start: "top 55%",
           end: "+=800",
-          markers: true,
+          markers: false,
           toggleActions: "play reverse play reverse",
         },
       });
@@ -45,7 +52,7 @@ const Animation1 = () => {
           trigger: TextRef.current,
           start: "top 75%",
           end: "top 0%",
-          //   markers: true,
+          markers: false,
           toggleActions: "play reverse play reverse",
         },
       });
@@ -60,8 +67,8 @@ const Animation1 = () => {
         scrollTrigger: {
           trigger: TextRef1.current,
           start: "top 75%",
-          end: "top 0%",
-          //   markers: true,
+          end: "+=700",
+          markers: false,
           toggleActions: "play reverse play reverse",
         },
       });
@@ -76,8 +83,8 @@ const Animation1 = () => {
         scrollTrigger: {
           trigger: TextRef2.current,
           start: "top 75%",
-          end: "top 0%",
-          //   markers: true,
+          end: "+=700",
+          markers: false,
           toggleActions: "play reverse play reverse",
         },
       });
@@ -87,14 +94,14 @@ const Animation1 = () => {
         x: 0,
         duration: 2.5,
         ease: "power1.out",
-        delay: 5,
+        delay: 1,
         scrollTrigger: {
           trigger: boxRef1.current,
           scroller: "body",
           start: "top 55%",
           end: "top 30%",
           scrub: 5,
-          //   markers: true,
+          markers: false,
         },
       });
     }
@@ -103,25 +110,57 @@ const Animation1 = () => {
         x: 0,
         duration: 2.5,
         ease: "power1.out",
-        delay: 5,
+        delay: 1,
         scrollTrigger: {
           trigger: boxRef2.current,
           scroller: "body",
           start: "top 55%",
           end: "top 30%",
           scrub: 5,
-          //   markers: true,
+          markers: false,
         },
       });
     }
-  }, []);
+    if (box1.current) {
+      gsap.to(box1.current, {
+        x: 0,
+        duration: 2.5,
+        ease: "power1.out",
+        delay: 1,
+        scrollTrigger: {
+          trigger: box1.current,
+          scroller: "body",
+          start: "top 55%",
+          end: "top 30%",
+          scrub: 5,
+          markers: false,
+        },
+      });
+    }
+    if (box2.current) {
+      gsap.to(box2.current, {
+        x: 0,
+        duration: 2.5,
+        ease: "power1.out",
+        delay: 1,
+        scrollTrigger: {
+          trigger: box2.current,
+          scroller: "body",
+          start: "top 55%",
+          end: "top 30%",
+          scrub: 5,
+          markers: false,
+        },
+      });
+    }
+  });
 
   return (
     <>
       <div className="h-screen w-full flex justify-center p-36 gap-20">
         <div
           ref={boxRef1}
-          className="bg-rose-300 flex-1"
+          className="square bg-rose-300 flex-1"
           style={{ transform: "translateX(-500px)" }}
         >
           box 1
@@ -129,8 +168,25 @@ const Animation1 = () => {
 
         <div
           ref={boxRef2}
-          className="bg-rose-400 flex-1"
-          style={{ transform: "translateX(400px)" }}
+          className="square bg-rose-400 flex-1"
+          style={{ transform: "translateX(500px)" }}
+        >
+          box 2
+        </div>
+      </div>
+      <div className="h-screen w-full flex justify-center p-36 gap-20">
+        <div
+          ref={box1}
+          className="square bg-rose-300 flex-1"
+          style={{ transform: "translateX(1000px)" }}
+        >
+          box 1
+        </div>
+
+        <div
+          ref={box2}
+          className="square bg-rose-400 flex-1"
+          style={{ transform: "translateX(-1000px)" }}
         >
           box 2
         </div>

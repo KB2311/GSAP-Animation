@@ -1,14 +1,22 @@
 import Animation1 from "./Animation1";
 import Animation2 from "./Animation2";
 import App from "./App";
+import SplitTextAnimation from "./SplitTextAnimation";
 import TextAnimation from "./TextAnimation";
+import VideoSection from "./VideoSection";
 
 export default function Home() {
   return (
     <>
-      <App />
-      <Animation1 />
+      <SplitTextAnimation />
+      {/* <App /> */}
+      {/* <Animation1 /> */}
       <Animation2 />
+      <VideoSection />
+      <TextAnimation />
+      <TextAnimation />
+      <TextAnimation />
+      <TextAnimation />
       <TextAnimation />
     </>
   );

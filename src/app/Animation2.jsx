@@ -1,9 +1,13 @@
 "use client";
 import React, { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap } from "gsap/dist/gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 
-gsap.registerPlugin(ScrollTrigger);
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.registerPlugin(useGSAP);
+}
 
 const Animation2 = () => {
   const wrapperBox = useRef(null);
@@ -12,15 +16,15 @@ const Animation2 = () => {
   const textRef1 = useRef(null);
   const textRef2 = useRef(null);
 
-  useEffect(() => {
-    const scrollTriggerInstance = ScrollTrigger.create({
+  useGSAP(() => {
+    ScrollTrigger.create({
       trigger: wrapperBox.current,
       start: "top top",
       end: "+=1500",
       pin: true,
       scrub: 1,
+      markers: true,
     });
-
     const rotateTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: wrapperBox.current,
@@ -40,6 +44,7 @@ const Animation2 = () => {
     rotateTimeline.to(boxRef1.current, {
       rotation: 360,
       duration: 5,
+      markers: false,
     });
 
     rotateTimeline.to(
@@ -48,6 +53,7 @@ const Animation2 = () => {
         rotation: 360,
         duration: 5,
         immediateRender: false,
+        markers: false,
       },
       "<"
     );
@@ -58,7 +64,7 @@ const Animation2 = () => {
         start: "top top",
         end: "+=1500",
         scrub: 1,
-        markers: true,
+        markers: false,
       },
     });
 
@@ -74,78 +80,76 @@ const Animation2 = () => {
       { opacity: 1, y: 0, duration: 5 },
       "<+=1.5"
     );
-
-    return () => {
-      scrollTriggerInstance.kill(true);
-      gsap.killTweensOf([textRef1.current, textRef2.current]);
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  }, []);
+  });
 
   return (
-    <div
-      ref={wrapperBox}
-      style={{
-        position: "relative",
-        height: "100vh",
-        overflow: "hidden",
-        backgroundColor: "#f0f0f0",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        gap: "40px",
-        paddingTop: "50px",
-      }}
-    >
+    <>
       <div
-        ref={boxRef1}
+        ref={wrapperBox}
         style={{
-          position: "absolute",
-          top: "40px",
-          right: "10px",
-          backgroundColor: "#fefcbf",
-          aspectRatio: "1 / 1",
+          position: "relative",
+          height: "100vh",
+          overflow: "hidden",
+          backgroundColor: "#f0f0f0",
           display: "flex",
+          flexDirection: "column",
           alignItems: "center",
-          justifyContent: "center",
+          gap: "40px",
+          paddingTop: "50px",
         }}
       >
-        1 absolute box
+        <div
+          ref={boxRef1}
+          style={{
+            position: "absolute",
+            top: "40px",
+            right: "10px",
+            backgroundColor: "#fefcbf",
+            aspectRatio: "1 / 1",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          1 absolute box
+        </div>
+        <div
+          ref={boxRef2}
+          style={{
+            position: "absolute",
+            bottom: "40px",
+            left: "10px",
+            backgroundColor: "#fefcbf",
+            aspectRatio: "1 / 1",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          2 absolute box
+        </div>
+        <div style={{ maxWidth: "1024px" }}>
+          <p ref={textRef1} style={{ opacity: 0 }}>
+            In 1992, Tim Berners-Lee circulated a document titled “HTML Tags,”
+            which outlined just 20 tags, many of which are now obsolete or have
+            taken other forms. The first surviving tag to be defined in the
+            document, after the crucial anchor tag, is the paragraph tag. It
+            wasn’t until 1993 that a discussion emerged on the proposed image
+            tag.
+          </p>
+        </div>
+        <div style={{ maxWidth: "1024px" }}>
+          <p ref={textRef2} style={{ opacity: 0 }}>
+            In 1992, Tim Berners-Lee circulated a document titled “HTML Tags,”
+            which outlined just 20 tags, many of which are now obsolete or have
+            taken other forms. The first surviving tag to be defined in the
+            document, after the crucial anchor tag, is the paragraph tag. It
+            wasn’t until 1993 that a discussion emerged on the proposed image
+            tag.
+          </p>
+        </div>
       </div>
-      <div
-        ref={boxRef2}
-        style={{
-          position: "absolute",
-          bottom: "40px",
-          left: "10px",
-          backgroundColor: "#fefcbf",
-          aspectRatio: "1 / 1",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        2 absolute box
-      </div>
-      <div style={{ maxWidth: "1024px" }}>
-        <p ref={textRef1} style={{ opacity: 0 }}>
-          In 1992, Tim Berners-Lee circulated a document titled “HTML Tags,”
-          which outlined just 20 tags, many of which are now obsolete or have
-          taken other forms. The first surviving tag to be defined in the
-          document, after the crucial anchor tag, is the paragraph tag. It
-          wasn’t until 1993 that a discussion emerged on the proposed image tag.
-        </p>
-      </div>
-      <div style={{ maxWidth: "1024px" }}>
-        <p ref={textRef2} style={{ opacity: 0 }}>
-          In 1992, Tim Berners-Lee circulated a document titled “HTML Tags,”
-          which outlined just 20 tags, many of which are now obsolete or have
-          taken other forms. The first surviving tag to be defined in the
-          document, after the crucial anchor tag, is the paragraph tag. It
-          wasn’t until 1993 that a discussion emerged on the proposed image tag.
-        </p>
-      </div>
-    </div>
+    </>
   );
 };
 

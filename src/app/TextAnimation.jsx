@@ -1,25 +1,33 @@
 "use client";
-import React, { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import TextPlugin from "gsap/TextPlugin";
+import React, { useRef } from "react";
+import { gsap } from "gsap/dist/gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 
-gsap.registerPlugin(TextPlugin);
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.registerPlugin(useGSAP);
+}
 
 const TextAnimation = () => {
   const text = useRef(null);
+  const wrapperBox = useRef(null);
 
-  useEffect(() => {
+  useGSAP(() => {
     const tl = gsap.timeline({ repeat: 0 });
-    tl.to("h1 span", {
+    tl.to(text.current, {
       duration: 4,
       text: " is so much fun you should try it some time!",
+      scrollTrigger: {
+        trigger: wrapperBox.current,
+        scrub: 3,
+        start: "top 70%",
+        end: "bottom bottom",
+      },
     });
-    return () => {
-      tl.kill();
-    };
-  }, []);
+  });
   return (
-    <div className="h-96 bg-blue-300 p-40">
+    <div ref={wrapperBox} className="h-96 bg-blue-300 p-40">
       <h1 className="text-3xl">
         Text Animation <span ref={text}></span>
       </h1>

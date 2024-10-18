@@ -1,9 +1,13 @@
 "use client";
-import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRef } from "react";
+import { gsap } from "gsap/dist/gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 
-gsap.registerPlugin(ScrollTrigger);
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.registerPlugin(useGSAP);
+}
 
 const App = () => {
   const boxRef1 = useRef(null);
@@ -12,12 +16,13 @@ const App = () => {
   const boxRef4 = useRef(null);
   const boxWrapperPin = useRef(null);
 
-  useEffect(() => {
+  useGSAP(() => {
     if (boxRef1.current) {
       gsap.to(boxRef1.current, {
         x: 400,
         duration: 1,
         delay: 1,
+        markers: false,
       });
     }
 
@@ -33,29 +38,32 @@ const App = () => {
           start: "top 90%",
           end: "+=300",
           scrub: 1,
-          markers: true,
+          markers: false,
         },
       });
     }
 
-    const pin = gsap.fromTo(
-      boxRef3.current,
-      {
-        translateX: 0,
-      },
-      {
-        translateX: "-190vw",
-        ease: "none",
-        duration: 1,
-        scrollTrigger: {
-          trigger: boxWrapperPin.current,
-          start: "top top",
-          end: "2000 top",
-          scrub: 0.6,
-          pin: true,
+    if (boxWrapperPin.current) {
+      gsap.fromTo(
+        boxRef3.current,
+        {
+          translateX: 0,
         },
-      }
-    );
+        {
+          translateX: "-190vw",
+          ease: "none",
+          duration: 1,
+          scrollTrigger: {
+            trigger: boxWrapperPin.current,
+            start: "top top",
+            end: "2000 top",
+            scrub: 0.6,
+            pin: true,
+            markers: false,
+          },
+        }
+      );
+    }
 
     if (boxRef4.current) {
       gsap.to(boxRef4.current, {
@@ -71,14 +79,11 @@ const App = () => {
           start: "top 60%",
           end: "+=20",
           scrub: 5,
-          markers: true,
+          markers: false,
         },
       });
     }
-    return () => {
-      pin.kill();
-    };
-  }, []);
+  });
 
   return (
     <div className="min-h-screen w-full">
