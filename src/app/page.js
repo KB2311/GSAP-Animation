@@ -9,8 +9,8 @@ export default function Home() {
   return (
     <>
       <SplitTextAnimation />
-      {/* <App /> */}
-      {/* <Animation1 /> */}
+      <App />
+      <Animation1 />
       <Animation2 />
       <VideoSection />
       <TextAnimation />
