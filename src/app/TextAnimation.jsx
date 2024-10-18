@@ -27,7 +27,7 @@ const TextAnimation = () => {
     });
   });
   return (
-    <div ref={wrapperBox} className="h-96 bg-blue-300 p-40">
+    <div ref={wrapperBox} className="h-96 w-max bg-blue-300 p-40">
       <h1 className="text-3xl">
         Text Animation <span ref={text}></span>
       </h1>

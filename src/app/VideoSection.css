@@ -5,15 +5,13 @@
   overflow: hidden;
   display: flex;
   justify-content: center;
-  align-items: end;
+  align-items: center;
   perspective: 600px;
-  background-repeat: no-repeat;
-  background-size: cover;
 }
 
 .video-container {
-  width: 80%;
-  height: 80%;
+  width: 70%;
+  height: 70%;
   transform-origin: bottom center;
   transform: perspective(600px) rotateX(20deg);
   opacity: 1;
