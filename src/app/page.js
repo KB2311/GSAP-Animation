@@ -14,7 +14,6 @@ export default function Home() {
       <Animation2 />
       <VideoSection />
       <TextAnimation />
-      <TextAnimation />
     </>
   );
 }
