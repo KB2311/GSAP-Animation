@@ -23,7 +23,7 @@ const Animation2 = () => {
       end: "+=1500",
       pin: true,
       scrub: 1,
-      markers: true,
+      // markers: true,
     });
     const rotateTimeline = gsap.timeline({
       scrollTrigger: {
@@ -31,7 +31,7 @@ const Animation2 = () => {
         start: "top top",
         end: "+=1500",
         scrub: true,
-        markers: true,
+        // markers: true,
         onLeave: () => {
           gsap.to([boxRef1.current, boxRef2.current], { rotation: 0 });
         },
