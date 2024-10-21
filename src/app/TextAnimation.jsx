@@ -14,15 +14,19 @@ const TextAnimation = () => {
   const wrapperBox = useRef(null);
 
   useGSAP(() => {
-    const tl = gsap.timeline({ repeat: 0 });
-    tl.to(text.current, {
-      duration: 4,
-      text: " is so much fun you should try it some time!",
-      scrollTrigger: {
-        trigger: wrapperBox.current,
-        scrub: 3,
-        start: "top 70%",
-        end: "bottom bottom",
+    ScrollTrigger.matchMedia({
+      "(min-width: 768px)": () => {
+        const tl = gsap.timeline({ repeat: 0 });
+        tl.to(text.current, {
+          duration: 4,
+          text: " is so much fun you should try it some time!",
+          scrollTrigger: {
+            trigger: wrapperBox.current,
+            scrub: 3,
+            start: "top 70%",
+            end: "bottom bottom",
+          },
+        });
       },
     });
   });
