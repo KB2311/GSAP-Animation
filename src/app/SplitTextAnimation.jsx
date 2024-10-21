@@ -22,6 +22,8 @@ const SplitTextAnimation = () => {
         Array.from(text).forEach((char, index) => {
           const charWrapper = document.createElement("div");
           charWrapper.style.display = "inline-block";
+          // charWrapper.style.overflow = "hidden";
+          charWrapper.style.position = "relative";
 
           const charDiv1 = document.createElement("div");
 
