@@ -14,8 +14,8 @@ export default function Home() {
       <GraphAnimation />
       <SideMenuAnimation />
       <SidebarMenuAnimation2 />
-      {/* <RollingText /> */}
-      {/* <App /> */}
+      <RollingText />
+      <App />
       <Animation1 />
       <Animation2 />
       <VideoSection />
