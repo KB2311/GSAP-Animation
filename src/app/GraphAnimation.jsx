@@ -77,15 +77,15 @@ const GraphAnimation = () => {
         "<"
       );
 
-    points.forEach((point, index) => {
+    points.forEach((point1, index1) => {
       tl.to(
-        point,
+        point1,
         {
           scale: 1,
-          duration: 0.3,
+          duration: 0.5,
           ease: "none",
         },
-        `-=${2 - index * 0.2}`
+        `-=${2 - index1 * 0.1}`
       );
     });
     points1.forEach((point1, index1) => {
