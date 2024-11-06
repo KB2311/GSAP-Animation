@@ -1,0 +1,36 @@
+ <svg
+          className={styles.Svg}
+          width="595"
+          height="596"
+          viewBox="0 0 595 596"
+          fill="none"
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+          }}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle
+            cx="297.5"
+            cy="297.737"
+            r="296"
+            stroke="url(#paint0_linear_3276_103)"
+            stroke-width="3"
+            stroke-dasharray="10 10"
+          />
+          <defs>
+            <linearGradient
+              id="paint0_linear_3276_103"
+              x1="584.053"
+              y1="268.76"
+              x2="-20.606"
+              y2="304.177"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop offset="0.155" stop-color="#EB2188" />
+              <stop offset="1" stop-color="#EEDAE7" stop-opacity="0" />
+            </linearGradient>
+          </defs>
+        </svg>

@@ -2,6 +2,7 @@ import Animation1 from "./Animation1";
 import Animation2 from "./Animation2";
 import App from "./App";
 import BoxAnimation3D from "./BoxAnimation3D";
+import CircleSvgAnimation from "./CircleSvgAnimation";
 import GraphAnimation from "./GraphAnimation";
 import RollingText from "./RollingText";
 import SidebarMenuAnimation2 from "./SidebarMenuAnimation2";
@@ -15,6 +16,7 @@ export default function Home() {
       <SideMenuAnimation />
       <SidebarMenuAnimation2 />
       <GraphAnimation />
+      <CircleSvgAnimation />
       <BoxAnimation3D />
       <RollingText />
       <App />
