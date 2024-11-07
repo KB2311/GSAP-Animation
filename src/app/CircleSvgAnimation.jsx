@@ -30,7 +30,6 @@ const SvgData = [
 ];
 
 const App = () => {
-  let newAngle;
   const numItems = 4;
   const angleStep = 180 / numItems;
   const validAngles = [0, -45, -90, -135];
@@ -111,27 +110,6 @@ const App = () => {
     if (autoRotateTimer.current) {
       clearInterval(autoRotateTimer.current);
     }
-  };
-
-  const resetAnimation = () => {
-    gsap.to(`.${styles.wrapper}`, {
-      rotation: 0,
-      transformOrigin: "center center",
-      duration: 0.5,
-      ease: "power1.inOut",
-    });
-
-    itemsRef.current.forEach((item) => {
-      gsap.to(item, {
-        rotation: 0,
-        duration: 0.5,
-        ease: "power1.inOut",
-      });
-    });
-
-    setActiveIndex(0);
-    newAngle = 0;
-    currentAngleRef.current = 0;
   };
 
   const rotateItems = (direction) => {
